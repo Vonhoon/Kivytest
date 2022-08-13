@@ -1,0 +1,96 @@
+#: import Clock kivy.clock.Clock
+Top:
+
+<Top>:
+    orientation: "vertical"
+    BoxLayout:
+        size_hint: 0.8, 0.05
+        height: "20dp"
+        pos_hint: { "top": 1 }
+        TextInput:
+            id: text_input
+            text_language: "kr"
+            text: "검색창"
+            foreground_color: .5, .5, .5, .8
+            font_name: "fonts/GmarketSansTTFBold.ttf"
+            multiline: False
+            on_touch_up: root.on_focus(self)
+            on_text_validate: root.on_text_validate(self, searchbutton, table)
+        Button:
+            id: searchbutton
+            text: "운에 맡기겠어!"
+            on_press: root.on_button_press(text_input, self, table)
+            text_language: "kr"
+            font_name: "fonts/GmarketSansTTFBold.ttf"
+
+    BoxLayout:
+        size_hint: .8, 0.05
+        orientation: "horizontal"
+        Label:
+            text: "검색 기간 설정: 최근 " + str(int(dateslider.value)) + "일"
+            font_size: "18dp"
+            font_name: "fonts/GmarketSansTTFBold.ttf"
+        Slider:
+            id: dateslider
+            active: True
+            on_value: root.on_slider_value(self)
+            min: 5
+            max: 90
+            value: 30
+    GridLayout:
+        size_hint: .8, 0.05
+        cols: 4
+        Label:
+            text: "Ruliweb"
+            font_name: "fonts/GmarketSansTTFBold.ttf"
+
+        Label:
+            text: "Clien"
+            font_name: "fonts/GmarketSansTTFBold.ttf"
+
+        Label:
+            text: "Coolenjoy"
+            font_name: "fonts/GmarketSansTTFBold.ttf"
+
+        Label:
+            text: "Ppomppu"
+            font_name: "fonts/GmarketSansTTFBold.ttf"
+
+    GridLayout:
+        size_hint: .8, 0.05
+        cols: 4
+
+        Switch:
+            id: rswitch
+            active: True
+            on_active: root.ruliweb_switch(self)
+
+        Switch:
+            id: cswitch
+            active: True
+            on_active: root.clien_switch(self)
+
+        Switch:
+            id: ceswitch
+            active: True
+            on_active: root.coolenjoy_switch(self)
+
+        Switch:
+            id: pswitch
+            active: True
+            on_active: root.ppomppu_switch(self)
+
+    ScrollView:
+        size_hint: 1, 0.7
+
+        GridLayout:
+            id: table
+            size_hint: 1, None
+            height: self.minimum_height
+            cols: 3
+            spacing: "20dp"
+
+
+<Padding>:
+    text: "   "
+    size_hint: 0.3, 1
